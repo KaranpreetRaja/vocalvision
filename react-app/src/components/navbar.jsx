@@ -3,7 +3,7 @@ import { useState } from "react";
 import { GiBeastEye } from "react-icons/gi";
 
 export default function Navbar() {
-    const [isLoggedIn, setLoggedIn] = useState(false);
+    const [isLoggedIn, setLoggedIn] = useState(true);
 
     return (
         <nav className="flex justify-between items-center p-6 bg-white text-black">
@@ -18,12 +18,16 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center">
-                {!isLoggedIn && (
-                    <div>
-                        <Link to="/login" className="btn-login">Login</Link>
-                        <Link to="/signup" className="btn-signup hover:bg-blue-700 transition ease-in-out duration-300">Create your account</Link>
-                    </div>
-                )}
+            {!isLoggedIn ? (
+                <div>
+                    <Link to="/login" className="btn-login">Login</Link>
+                    <Link to="/signup" className="btn-signup hover:bg-blue-700 transition ease-in-out duration-300">Create your account</Link>
+                </div>
+            ) : (
+                <div>
+                    <button className="btn-signup hover:bg-blue-700 transition ease-in-out duration-300">Sign Out</button>
+                </div>
+            )}
             </div>
         </nav>
     )

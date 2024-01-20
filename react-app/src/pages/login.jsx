@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { FcGoogle } from 'react-icons/fc'
 import Navbar from '../components/navbar';
 import { Link, useNavigate } from 'react-router-dom';
 

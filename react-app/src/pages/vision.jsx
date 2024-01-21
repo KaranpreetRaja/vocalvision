@@ -1,64 +1,44 @@
 import React, { useState, useEffect } from "react";
 import Slide from "../components/slide";
-import song from "../pages/yeat.mp3";
-import image from "../test/man.png"
 import Navbar from "../components/navbar";
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Vision() {
-    const { uid, sessionId } = useParams();
-    const [visionData, setVisionData] = useState(null);
-    const [audioData, setAudioData] = useState(null);
-    const [imageData, setImageData] = useState(null);
-    const [textData, setTextData] = useState(null);
-  
-    // useEffect(() => {
+  const { uid, sessionId } = useParams();
+  const [audioUrl, setAudioUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
-    //   axios.get('your_api_endpoint')
-    //     .then(response => {
-    //       const { audio, image, text } = response.data;
-  
-    //       axios.get(audio)
-    //         .then(audioResponse => setAudioData(audioResponse.data))
-    //         .catch(audioError => console.error('Error fetching audio data:', audioError));
-  
-    //       axios.get(image)
-    //         .then(imageResponse => setImageData(imageResponse.data))
-    //         .catch(imageError => console.error('Error fetching image data:', imageError));
-  
-    //       axios.get(text)
-    //         .then(textResponse => setTextData(textResponse.data))
-    //         .catch(textError => console.error('Error fetching text data:', textError));
-  
-    //       setVisionData(response.data);
-    //     }).catch(error => console.error('Error fetching vision data:', error));
-        
-    // }, []); 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const [response1, response2, response3] = await Promise.all([
-              axios.get('https://api.example.com/data1'),
-              axios.get('https://api.example.com/data2'),
-              axios.get('https://api.example.com/data3'),
-            ]);
-    
-            setData1(response1.data);
-            setData2(response2.data);
-            setData3(response3.data);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
-    
-        fetchData();
-    }, []);
+        const audioResponse = await axios.get(proxyUrl + 'https://automatelife.pythonanywhere.com/test/audio', { responseType: 'arraybuffer' });
+        const imageResponse = await axios.get(proxyUrl + 'https://automatelife.pythonanywhere.com/test/image', { responseType: 'blob' });
 
-    return (
-        <div>
-            <Navbar userId={uid}/>
-            <Slide visibility={true} audio={song} image={image} text="Ibrahim song type beat"></Slide>
-        </div>
+        const audioBlob = new Blob([audioResponse.data], { type: 'audio/mpeg' });
+        const audioDataUrl = URL.createObjectURL(audioBlob);
+
+        // For the image, convert the blob to a data URL
+        const imageBlob = new Blob([imageResponse.data], { type: 'image/png' }); // Adjust the image type accordingly
+        const imageDataUrl = URL.createObjectURL(imageBlob);
+
+        setAudioUrl(audioDataUrl);
+        setImageUrl(imageDataUrl);
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <Navbar userId={uid} />
+      <Slide visibility={true} audio={audioUrl} image={imageUrl} text="Ibrahim song type beat" />
+    </div>
   );
 }

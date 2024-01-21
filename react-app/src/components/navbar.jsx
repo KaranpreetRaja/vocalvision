@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { GiBeastEye } from "react-icons/gi";
 
-export default function Navbar() {
+export default function Navbar({ userId }) {
     const [isLoggedIn, setLoggedIn] = useState(true);
 
     return (
@@ -25,6 +25,7 @@ export default function Navbar() {
                 </div>
             ) : (
                 <div>
+                    <Link to={`/dashboard/${userId}`} className="text-gray-500 mr-6">dashboard</Link>
                     <button className="btn-signup hover:bg-blue-700 transition ease-in-out duration-300">Sign Out</button>
                 </div>
             )}

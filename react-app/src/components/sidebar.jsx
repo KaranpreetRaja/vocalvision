@@ -11,11 +11,11 @@ export default function Sidebar() {
             <div className="flex flex-col w-full text-left ml-11 text-lg space-y-4 mt-11">
                 <div className="flex flex-row items-center text-blue-500 space-x-2">
                     <LuClock4 />
-                    <span>Recent Projects</span>
+                    <span>Recent Visions</span>
                 </div>
                 <div className="flex flex-row items-center text-black space-x-2">
                     <MdOutlineLibraryBooks />
-                    <span>Projects</span>
+                    <span>Visions</span>
                 </div>
                 <div className="flex flex-row items-center text-black space-x-2">
                     <FaPeopleGroup />

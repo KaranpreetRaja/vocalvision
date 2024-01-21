@@ -26,10 +26,10 @@ export default function Home(){
                         <p><strong>Creation Tools:</strong> Access an intuitive interface with creative tools to craft visually appealing and informative content based on provided prompts.</p>
                     </section>
 
-                    <section className="content-search-section card">
-                        <h3>Content Search</h3>
-                        <p><strong>Search Functionality:</strong> Integrate with search engines to find relevant text, images, and AI-generated content for your presentations.</p>
-                        <p><strong>Content Ranking:</strong> Implement a ranking system to prioritize search results based on relevance and creativity.</p>
+                    <section className="user-auth-section card">
+                        <h3>User Authentication</h3>
+                        <p><strong>Login Protection:</strong> Secure your content by implementing user authentication to control access.</p>
+                        <p><strong>Authentication Process:</strong> Users can log in with their credentials to gain access to personalized features and content.</p>
                     </section>
 
                     <section className="ai-content-generation-section card">
@@ -54,24 +54,6 @@ export default function Home(){
                         <h3>User Interaction</h3>
                         <p><strong>User-Friendly Interface:</strong> Provide an intuitive interface for users to interact with the platform, customize settings, and access AI-generated results.</p>
                         <p><strong>Query Input:</strong> Allow users to input prompts for information retrieval and AI content generation.</p>
-                    </section>
-
-                    <section className="integration-api-section card">
-                        <h3>Integration and API</h3>
-                        <p><strong>API Support:</strong> Offer APIs for seamless integration with other creative tools and learning applications.</p>
-                        <p><strong>External Integrations:</strong> Support integration with external data sources, databases, or other educational services.</p>
-                    </section>
-
-                    <section className="performance-monitoring-section card">
-                        <h3>Performance Monitoring</h3>
-                        <p><strong>Monitoring Tools:</strong> Provide tools for monitoring the performance of AI-generated content and user engagement over time.</p>
-                        <p><strong>Automatic Updates:</strong> Implement mechanisms for automatic updates and improvements to enhance the AI-generated learning experience.</p>
-                    </section>
-
-                    <section className="support-section card">
-                        <h3>Documentation and Support</h3>
-                        <p><strong>User Documentation:</strong> Offer comprehensive documentation to guide users on how to make the most of the platform.</p>
-                        <p><strong>Customer Support:</strong> Provide channels for users to seek assistance or inquire about the AI-generated content creation process.</p>
                     </section>
                     </main>
                 </div>

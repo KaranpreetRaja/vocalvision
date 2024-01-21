@@ -3,10 +3,10 @@ import os
 import random
 from openai import OpenAI
 
-
+DELIMITER = "%5%"
 # make a hash map of types and their response content
 contentmap = {
-    "lecture": "Generate a lecture style text with actual explanations on the topic and the response should be separated into sentences and each sentence should represented as a slide. No empty lines in the response. There should be less than 2 slides for the topic",
+    "lecture": "Generate a lecture transcript that should span about three slides. Separate the slides by the following delimiter: "+ DELIMITER +" The transcript should not have any other indicators of a new slide.",
     "presentation": "This is a presentation.",
     "story": "This is a story.",
 }
@@ -37,14 +37,14 @@ class GenerationManager:
         transcript = self.generate_transcript(prompt, response_style_type)
 
         # segment transcript into paragraphs
-        sentences = transcript.split("\n")
+        sentences = transcript.split(DELIMITER)
         self.slides_text= sentences
         counter = 1
         # use generate_image to generate an image and audio for each paragraph
         for sentence in sentences:
             image_url = self.generate_image("Generate an image that matches the following topic " + sentence)
             self.images.append(image_url)
-            audio_dir = self.generate_audio(text=sentence,session_id="12345", file_name="slide"+str(counter))
+            audio_dir = self.generate_audio(text=sentence,session_id="69696969", file_name="slide"+str(counter))
             self.audios.append(audio_dir)
             counter +=1
 
@@ -71,7 +71,7 @@ class GenerationManager:
         # segment transcript into sentences
         return transcript
 
-    def generate_image(self,prompt_text, testing=True, model="dall-e-3"):
+    def generate_image(self,prompt_text, testing=False, model="dall-e-3"):
         """Function to get an image URL based on the provided text prompt"""
 
         image_url=""
@@ -86,8 +86,8 @@ class GenerationManager:
                 n=1,
             )
             image_url = response.data[0].url
-
-        image_url = self._get_random_test_image()
+        else:
+            image_url = self._get_random_test_image()
         print("Success: IMG_URL = " + image_url)
         # add image to images array
 
@@ -136,7 +136,7 @@ class GenerationManager:
 
 generator = GenerationManager("session_123", "Local Area Networks")
 # generator.generate_audio("Wow I am actually surprised that this is working so seemlessly, things are going nicely so far. Beautiful stuff","696969")
-# generator.generate_image(prompt_text="An image of a coke bottle",testing=True)
+# generator.generate_image(prompt_text="An image of a coke bottle",testing=True)    
 generator.generate_slideshow(prompt="Local Area Networks", type=contentmap["lecture"])
 print(generator.images)
 print(generator.audios)

@@ -19,7 +19,7 @@ contentmap = {
 
 
 class GenerationManager:
-    def __init__(self, session_id, prompt, response_style_type="lecture"):
+    def __init__(self, session_id):
         self.client = OpenAI(api_key=os.environ["OPENAI_KEY"])
 
         self.session_id = session_id
@@ -39,8 +39,12 @@ class GenerationManager:
         else:
             response_style_type = contentmap[type]
 
+        print(f"Prompt: {prompt} and New Type: {response_style_type}")
+
         # use generate_transcript to generate a transcript
         transcript = self.generate_transcript(prompt, response_style_type)
+
+        print(f"Transcript: {transcript}")
 
         # segment transcript into paragraphs
         sentences = transcript.split(DELIMITER)
@@ -177,8 +181,8 @@ class GenerationManager:
         except requests.exceptions.RequestException as e:
             print(f"Error downloading image: {e}")
 
+# generator = GenerationManager("session_123", "Mammoth History")
 
-generator = GenerationManager("session_123", "Mammoth History")
 # generator.generate_audio(
 #     "Wow I am actually surprised that this is working so seemlessly, things are going nicely so far. Beautiful stuff",
 #     "1696969",
@@ -186,7 +190,8 @@ generator = GenerationManager("session_123", "Mammoth History")
 # generator.generate_image(
 #     prompt_text="An image of a coke bottle", testing=True, session_id="12345"
 # )
-generator.generate_slideshow(prompt="Mammoth History", type=contentmap["lecture"])
-print(generator.images)
-print(generator.audios)
-print(generator.slides_text)
+
+# generator.generate_slideshow(prompt="Mammoth History", type=contentmap["lecture"])
+# print(generator.images)
+# print(generator.audios)
+# print(generator.slides_text)

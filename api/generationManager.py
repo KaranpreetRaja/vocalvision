@@ -62,9 +62,7 @@ class GenerationManager:
             self.audios.append(audio_dir)
             counter += 1
 
-        # TODO: return slideshow after serializing it
-
-        pass
+        return {"images": self.images, "audios": self.audios, "slides_text": self.slides_text}
 
     def generate_transcript(self, prompt, response_style_type):
         """

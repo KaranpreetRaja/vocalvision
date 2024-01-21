@@ -51,8 +51,8 @@ JSON response format:
             {
                 "slide_id": "slide id"
                 "slide_text": "slide text"
-                "slide_image_endpoint": "endpoint extension"
-                "slide_audio_endpoint": "endpoint extension"
+                "slide_image_url": "url"
+                "slide_audio_url": "url"
             }
             ...
         ]
@@ -86,7 +86,7 @@ def use():
         # make a slideshow from the prompt and behavior
         manager = GenerationManager(session_id)
         slideshow = manager.generate_slideshow(prompt, behavior)
-        
+
 
         # make
     except Exception as e:

@@ -5,10 +5,12 @@ import { FaPlus } from "react-icons/fa";
 import UserInfo from "./userInfo";
 import UserPrompt from "./userPrompt";
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function Wizard() {
+export default function Wizard({userid}) {
   const [page, setPage] = useState(1);
   const [formData, setFormData] = useState({});
+  const navigate = useNavigate()
 
   const handleSubmit = () => {
     console.log('Submitting data:', formData);
@@ -16,6 +18,7 @@ export default function Wizard() {
     axios.post('your_api_endpoint', formData)
       .then((response) => {
         console.log('Submission successful:', response.data);
+        navigate(`/dashboard/${userid}/${response.data.session_id}`);
       })
       .catch((error) => {
         console.error('Error submitting data:', error);
@@ -36,11 +39,11 @@ export default function Wizard() {
   }
 
   const handleUserInfoChange = (userInfoData) => {
-    setFormData((prevData) => ({ ...prevData, userInfo: userInfoData }));
+    setFormData((prevData) => ({ ...prevData, userInfoData }));
   };
 
   const handleUserPromptChange = (userPromptData) => {
-    setFormData((prevData) => ({ ...prevData, userPrompt: userPromptData }));
+    setFormData((prevData) => ({ ...prevData, userPromptData }));
   };
 
   return (
@@ -65,7 +68,7 @@ export default function Wizard() {
               </button>
           </div>
           
-          <UserInfo visibility={page === 1} onChange={handleUserInfoChange} />
+          <UserInfo userid={userid} visibility={page === 1} onChange={handleUserInfoChange} />
           <UserPrompt visibility={page === 2} onChange={handleUserPromptChange} />
           
           <div className="flex justify-between w-full rounded-t-lg px-4 pb-4">

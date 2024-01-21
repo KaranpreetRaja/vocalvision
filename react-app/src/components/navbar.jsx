@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GiBeastEye } from "react-icons/gi";
 
-export default function Navbar({ userId }) {
+export default function Navbar({ userId, logged }) {
     const [isLoggedIn, setLoggedIn] = useState(true);
 
+    useEffect(() => {
+        setLoggedIn(logged)
+    }, [])
+    
     return (
         <nav className="flex justify-between items-center p-6 bg-white text-black">
             <div className="flex items-center">

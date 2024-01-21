@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 export default function UserPrompt({ visibility, onChange }) {
-  const [creationalPrompt, setCreationalPrompt] = useState('');
-  const [behavioralPrompt, setBehavioralPrompt] = useState('');
+  const [prompt, setCreationalPrompt] = useState('');
+  const [behavioral, setBehavioralPrompt] = useState('');
   const [promptType, setPromptType] = useState('lecture');
   const [slideLimit, setSlideLimit] = useState(10); 
 
   const handleInputChange = () => {
-    const adjustedBehavioralPrompt = ['lecture', 'story'].includes(promptType) ? promptType : behavioralPrompt;
+    const adjustedBehavioralPrompt = ['lecture', 'story'].includes(promptType) ? promptType : behavioral;
 
-    onChange({ creationalPrompt, behavioralPrompt: adjustedBehavioralPrompt, slideLimit });
+    onChange({ prompt, behavioral: adjustedBehavioralPrompt, slideLimit });
   };
 
   return (
@@ -22,7 +22,7 @@ export default function UserPrompt({ visibility, onChange }) {
           <textarea
             className="w-full border border-gray-300 p-2 rounded-md text-md max-h-20"
             placeholder="Creational prompt..."
-            value={creationalPrompt}
+            value={prompt}
             onChange={(e) => {
               setCreationalPrompt(e.target.value);
               handleInputChange();
@@ -56,7 +56,7 @@ export default function UserPrompt({ visibility, onChange }) {
             <textarea
               className="w-full border border-gray-300 p-2 rounded-md text-md max-h-20"
               placeholder="Behavioral prompt..."
-              value={behavioralPrompt}
+              value={behavioral}
               onChange={(e) => {
                 setBehavioralPrompt(e.target.value);
                 handleInputChange();

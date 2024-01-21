@@ -1,11 +1,13 @@
 import { useState } from "react";
 
-export default function UserInfo({ visibility, onChange }) {
-  const [visionName, setVisionName] = useState('');
+export default function UserInfo({ visibility, onChange, userid }) {
+  const [session_name, setVisionName] = useState('');
   const [description, setDescription] = useState('');
 
+  const session_owner = userid;
+  
   const handleInputChange = () => {
-    onChange({ visionName, description });
+    onChange({ session_name,  session_owner, userid});
   };
 
   return (
@@ -20,10 +22,10 @@ export default function UserInfo({ visibility, onChange }) {
           </label>
           <input
             type="text"
-            id="visionName"
+            id="session_name"
             className="w-full border border-gray-300 p-2 rounded-md text-md"
             placeholder="Enter vision name"
-            value={visionName}
+            value={session_name}
             onChange={(e) => {
               setVisionName(e.target.value);
               handleInputChange();
@@ -31,7 +33,6 @@ export default function UserInfo({ visibility, onChange }) {
           />
         </div>
 
-        {/* Description paragraph */}
         <p className="text-lg text-gray-600 mt-4 mb-4">
           Please provide a brief description of your course (Optional):
         </p>

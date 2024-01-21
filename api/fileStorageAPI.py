@@ -21,7 +21,7 @@ def get(file_id):
     # Send the file as a response
     return send_file(file_path, as_attachment=True)
 
-def upload(file_name):
+def firebase_upload(file_name):
     """
     Uploads a file to Firebase Storage.
     """
@@ -33,5 +33,3 @@ def upload(file_name):
     print(f"URL: {file_ref.public_url}")
 
     return file_ref.public_url
-
-upload(f"test.png")

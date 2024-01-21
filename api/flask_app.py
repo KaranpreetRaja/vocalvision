@@ -16,6 +16,13 @@ from userAPI import user_api
 def test():
     return 'API is working!'
 
+@app.route('/test/image')
+def test_image():
+    return Flask.send_file(os.curdir + 'test.png')
+
+@app.route('/test/audio')
+def test_audio():
+    return Flask.send_file(os.curdir + 'test.mp3')
 
 app.register_blueprint(user_api, url_prefix='/api/user')
 app.register_blueprint(user_api, url_prefix='/api/session')
